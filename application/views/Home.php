@@ -416,11 +416,7 @@
           <h2 class="page-header" style="font-family: Raleway-Black; font-size: 35px;"><b>TESTIMONIALS</b><br><small style="font-family: Lato-Regular;">apa kata mereka?</small></h2>
         
         <div class="carousel slide" id="testimonials-rotate">
-          <ol class="carousel-indicators">
-            <li class="active" data-slide-to="0" data-target="#testimonials-rotate"></li>
-            <li data-slide-to="1" data-target="#testimonials-rotate"></li>
-            <li data-slide-to="2" data-target="#testimonials-rotate"></li>
-          </ol>
+          
 
         <div class="carousel-inner">
         <div class="item active" style="border: solid 5px;">
