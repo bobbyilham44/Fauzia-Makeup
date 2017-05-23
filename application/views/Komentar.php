@@ -6,18 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>SB Admin - Bootstrap Admin Template</title>
+    <title>Fauzia Makeup</title>
     <link href="<?php echo base_url()?>assets/admin/css/bootstrap.min.css" rel="stylesheet">
 	<link href="<?php echo base_url()?>assets/admin/css/sb-admin.css" rel="stylesheet">
 	<link href="<?php echo base_url()?>assets/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 </head>
 <style type="text/css">
-    td, th{
-        text-align: center;
 
-    }
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
 
+th, td {
+    padding: 5px;
+}
 </style>
 
 <body>
@@ -50,29 +54,23 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
-                        <a href="#"><i class="fa fa-fw fa-user"></i> Pertanyaan User</a>
+                        <a href="#"><i class="fa fa-lg fa-comments"> Pertanyaan User</i></a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url()?>index.php/My_Controller/admin"><i class="fa fa-fw fa-edit"></i> Ganti Password</a>
+                        <a href="<?php echo base_url()?>index.php/My_Controller/admin"> <i class="fa fa-lg fa-edit"> Ganti Password</i></a>
+                    </li>
+                     <li>
+                        <a href="<?php echo base_url()?>index.php/My_Controller/slider"><i class="fa fa-lg fa-desktop"> Slider</i></a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url()?>index.php/My_Controller/gallery"><i class="fa fa-lg fa-image"> Gallery</i></a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url()?>index.php/My_Controller/testimonials"><i class="fa fa-lg fa-thumbs-up"> Testimonials</i></a>
                     </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
-
-
-<!-- <tbody>
-				  <?php foreach ($data as $x) { ?>
-					  <tr>
-						   <td><?= $x['kode'] ?></td>
-						   <td><?= $x['gambar'] ?></td>
-					  </tr>
-				  <?php } ?>
-				</tbody>
-				</table><br>
-				<a href="< -->?= base_url() ?>"><button>Back</button></a>
-
-
-
 
         </nav>
         <div id="page-wrapper">
@@ -81,14 +79,23 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Forms
+                            Pertanyaan User
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">
-                                <i class="fa fa-user"></i>  <a href="#">Pertanyaan User</a>
+                                <a href="#"><i class="fa fa-lg fa-comments">Pertanyaan User</i></a>
                             </li>
                             <li>
-                                <i class="fa fa-edit"></i> <a href="<?php echo base_url()?>index.php/My_Controller/admin"> Ganti Password </a>
+                                <a href="<?php echo base_url()?>index.php/My_Controller/admin"> <i class="fa fa-lg fa-edit"> Ganti Password</i></a>
+                            </li>
+                             <li>
+                                <a href="<?php echo base_url()?>index.php/My_Controller/slider"><i class="fa fa-lg fa-desktop"> Slider</i></a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url()?>index.php/My_Controller/gallery"><i class="fa fa-lg fa-image"> Gallery</i></a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url()?>index.php/My_Controller/testimonials"><i class="fa fa-lg fa-thumbs-up"> Testimonials</i></a>
                             </li>
                         </ol>
                     </div>
@@ -96,18 +103,20 @@
 
                 <table align="center" style="width: 100%;">
                     <thead>
-                        <th style="padding-right: 20px;"></th>  
-                        <th>Nama</th>
-                        <th>Email</th>
-                        <th>Jumlah orang</th>
-                        <th>Tanggal</th>
-                        <th>Pesan</th>
+                        <th style="padding-right: 20px;"></th>
+                        <th style="text-align: center;">ID</th>  
+                        <th style="text-align: center;">Nama</th>
+                        <th style="text-align: center;">Email</th>
+                        <th style="text-align: center;">Jumlah orang</th>
+                        <th style="text-align: center;">Tanggal</th>
+                        <th style="text-align: center;">Pesan</th>
                     </thead>
-                    <form method="post" action="<?php echo base_url()?>index.php/My_Controller/delete_barang">
-                    <tbody>
+                    <form method="post" action="<?php echo base_url()?>index.php/My_Controller/delete_barang"> <!-- delete banyak row -->
+                    <tbody style="text-align: center;">
                         <?php foreach ($data as $x) { ?>
                         <tr>
-                        <td><input type="checkbox" name="komentar" value="<?php echo $x['Name']?>"></td>
+                        <td><input type="checkbox" name="komentar[]" value="<?php echo $x['ID_komentar']?>"></td>
+                        <td><?php echo $x['ID_komentar']; ?></td>
                         <td><?php echo $x['Name']; ?></td>
                         <td><?php echo $x['Email']; ?></td>
                         <td><?php echo $x['People']; ?></td>
@@ -115,14 +124,14 @@
                         <td><?php echo $x['Message']; ?></td>
 
                         <td align="center">
-                            <a href="<?php echo base_url()."index.php/My_Controller/delete/".$x['Name']; ?>"><button style="border: solid 1px; margin-top: 10px; margin-bottom: 10px;">Delete</button></a>
+                            <a href="<?php echo base_url()."index.php/My_Controller/delete".$x['ID_komentar']; ?>"><button class="btn-block" style="border: solid 1px; margin-top: 10px; margin-bottom: 10px;">Delete</button></a>
                         </td>
                         </tr>
                         <?php } ?>
                     </tbody>
                 </table>
                 <br>
-                        <input type="submit" value="Delete">
+                        <input class="btn-primary" type="submit" value="Delete">
                     </form> 
 
             </div>
@@ -132,9 +141,6 @@
     </div>
     <!-- /#wrapper -->
     <!-- jQuery -->
-    <link href="<?php echo base_url()?>assets/admin/css/bootstrap.min.css" rel="stylesheet">
-<link href="<?php echo base_url()?>assets/admin/css/sb-admin.css" rel="stylesheet">
-<link href="<?php echo base_url()?>assets/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <script src="<?php echo base_url()?>assets/admin/js/jquery.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="<?php echo base_url()?>assets/admin/js/bootstrap.min.js"></script>
