@@ -12,6 +12,19 @@
 	<link href="<?php echo base_url()?>assets/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 </head>
+
+<style type="text/css">
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 5px;
+}
+</style>
+
 <body>
     <div id="wrapper">
         <!-- Navigation -->
@@ -88,34 +101,55 @@
                             </li>
                         </ol>
                     </div>
-                </div>
+                </div></div>
 
-                <!-- /.row -->
-                <div class="row">
-                    <div class="col-lg-6">
-                        <?php echo validation_errors();?>
 
-                            <?php echo form_open_multipart('My_Controller/createSlider'); ?>
-                            
-                            <table>
-                                <div class="form-group">
-                                    <label for="f_caption_slider">Caption</label>
-                                    <input class="form-control" type="text" name="f_caption_slider" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="f_gambar_slider">Gambar</label></td>
-                                    <input type="file" name="f_gambar_slider" size="20" />
-                                </div>
-                                
-                              <tr>
-                                <td><input type="hidden" name="is_submit" value="1" /></td>
-                                <button type="submit" name="submit" value="Submit" class="btn btn-default" style="margin-bottom: 20px; margin-top: 10px;">Submit Button</button>
-                              </tr>
-                            </table>
 
-                        <?php echo form_close(); ?>
-                </div>
-                <!-- /.row -->
+                
+
+                <table align="center" style="width: 100%;">
+                
+                    <th style="padding-right: 20px;"></th>
+                    <th style="text-align: center;">ID</th>  
+                    <th style="text-align: center;">Caption</th>
+                    <th style="text-align: center;">Gambar</th>
+                </tr>
+                <?php foreach ($data1 as $b) { ?>
+                <tr>
+                        <td><input type="checkbox" name="slider[]" value="<?php echo $b['ID_slider']?>"></td>
+                        <td><?php echo $b['ID_slider']; ?></td>
+                        <td><?php echo $b['caption_slider']; ?></td>
+                    <td style="text-align:center" style="width:50%;"> <img src=<?php echo base_url($b['gambar_slider']);?> style="height:100px;"></td>
+                    <td align="center">
+                        <a href ="<?php echo base_url()."index.php/My_Controller/edit_data/".$b['ID_slider']; ?>">Edit</a>
+                    </td>
+                </tr>
+                <?php } ?>
+                    <!-- <thead>
+                        <th style="padding-right: 20px;"></th>
+                        <th style="text-align: center;">ID</th>  
+                        <th style="text-align: center;">Caption</th>
+                        <th style="text-align: center;">Gambar</th>
+                    </thead>
+                                        <tbody style="text-align: center;">
+                        <?php foreach ($data1 as $b) { ?>
+                        <tr>
+                        <td><input type="checkbox" name="slider[]" value="<?php echo $b['ID_slider']?>"></td>
+                        <td><?php echo $b['ID_slider']; ?></td>
+                        <td><?php echo $b['caption_slider']; ?></td>
+                        <td><img alt="" src="<?php echo base_url(). $b['gambar_slider']; ?>" class="img-circle img-responsive" height="200" width="200" style="display: inline-block;"/></td>
+
+                        <td align="center">
+                            <a href="<?php echo base_url()."index.php/My_Controller/update_slider".$b['ID_slider']; ?>"><button class="btn-warning" style="border: solid 1px; margin-top: 10px; margin-bottom: 10px;">Edit</button></a> <br>
+                            <a href="<?php echo base_url()."index.php/My_Controller/delete_slider".$b['ID_slider']; ?>"><button class="btn-danger" style="border: solid 1px; margin-top: 10px; margin-bottom: 10px;">Delete</button></a>
+                        </td>
+                        </tr>
+                        <?php } ?>
+                    </tbody> -->
+                </table>
+                <br>
+                    </form>
+
             </div>
             <!-- /.container-fluid -->
         </div>

@@ -111,7 +111,7 @@ th, td {
                         <th style="text-align: center;">Tanggal</th>
                         <th style="text-align: center;">Pesan</th>
                     </thead>
-                    <form method="post" action="<?php echo base_url()?>index.php/My_Controller/delete_barang"> <!-- delete banyak row -->
+                    <form method="post" action="<?php echo base_url()?>index.php/My_Controller/delete_komentar"> <!-- delete banyak row -->
                     <tbody style="text-align: center;">
                         <?php foreach ($data as $x) { ?>
                         <tr>
@@ -124,14 +124,14 @@ th, td {
                         <td><?php echo $x['Message']; ?></td>
 
                         <td align="center">
-                            <a href="<?php echo base_url()."index.php/My_Controller/delete".$x['ID_komentar']; ?>"><button class="btn-block" style="border: solid 1px; margin-top: 10px; margin-bottom: 10px;">Delete</button></a>
+                            <a href="<?php echo base_url()."index.php/My_Controller/deletekomentar".$x['ID_komentar']; ?>"><button class="btn-block" style="border: solid 1px; margin-top: 10px; margin-bottom: 10px;">Delete</button></a>
                         </td>
                         </tr>
                         <?php } ?>
                     </tbody>
                 </table>
                 <br>
-                        <input class="btn-primary" type="submit" value="Delete">
+                        <input class="btn-primary" type="submit" value="Delete All Checked">
                     </form> 
 
             </div>

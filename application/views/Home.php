@@ -98,7 +98,7 @@
         <div class="carousel-inner">
           <?php 
           $active = true;
-          foreach ($data as $x) { ?>
+          foreach ($data1 as $x) { ?>
             <div class="item <?php if($active){
               echo 'active';
               }else{
@@ -166,247 +166,25 @@
                 </div>
             </div>
             <div class="row">
+                <?php foreach ($data2 as $q) { ?>
                 <div class="col-md-4 col-sm-6 portfolio-item">
                     <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
                         <div class="portfolio-hover">
                             <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
+                                <h3><?php echo $q['keterangan_gallery']; ?></h3>
                             </div>
                         </div>
-                        <img src="<?php echo base_url()?>img/p7.jpg" class="img-responsive" alt="">
+                        <img src="<?php echo base_url(). $q['gambar_gallery']; ?>" class="img-responsive" alt="">
                     </a>
                     <div class="portfolio-caption">
-                        <h4>Full Makeup</h4>
-                        <p class="text-muted">Graduation</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="<?php echo base_url()?>img/p3.jpg" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Facial Makeup</h4>
-                        <p class="text-muted">Party</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="<?php echo base_url()?>img/p5.jpg" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Full Makeup</h4>
-                        <p class="text-muted">Gathering</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="<?php echo base_url()?>img/p10.jpg" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Full Makeup<</h4>
-                        <p class="text-muted">Graduation</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="<?php echo base_url()?>img/p11.jpg" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Before & After</h4>
-                        <p class="text-muted">Wedding Party</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="<?php echo base_url()?>img/p1.jpg" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Before & After</h4>
-                        <p class="text-muted">Graduation</p>
-                    </div>
-                </div>
+                        <h4><?php echo $q['caption_gallery']; ?></h4>
+                        <p class="text-muted"><?php echo $q['occasion_gallery']; ?></p>
+                    </div> 
+                </div>  
+                <?php } ?>
             </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Modals -->
-    <!-- Use the modals below to showcase details about your portfolio projects! -->
-
-    <!-- Portfolio Modal 1 -->
-    <div class="portfolio-modal modal" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr">
-                        <div class="rl">
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 col-lg-offset-2">
-                            <div class="modal-body">
-                                <!-- Project Details Go Here -->
-                                <img class="img-responsive img-centered" src="<?php echo base_url()?>img/p8.jpg" alt="">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Portfolio Modal 2 -->
-   <div class="portfolio-modal modal" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr">
-                        <div class="rl">
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 col-lg-offset-2">
-                            <div class="modal-body">
-                                <!-- Project Details Go Here -->
-                                <img class="img-responsive img-centered" src="<?php echo base_url()?>img/p4.jpg" alt="">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Portfolio Modal 3 -->
-    <div class="portfolio-modal modal" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr">
-                        <div class="rl">
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 col-lg-offset-2">
-                            <div class="modal-body">
-                                <!-- Project Details Go Here -->
-                                <img class="img-responsive img-centered" src="<?php echo base_url()?>img/p6.jpg" alt="">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Portfolio Modal 4 -->
-    <div class="portfolio-modal modal" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr">
-                        <div class="rl">
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 col-lg-offset-2">
-                            <div class="modal-body">
-                                <!-- Project Details Go Here -->
-                                <img class="img-responsive img-centered" src="<?php echo base_url()?>img/p10.jpg" alt="">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Portfolio Modal 5 -->
-    <div class="portfolio-modal modal" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr">
-                        <div class="rl">
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 col-lg-offset-2">
-                            <div class="modal-body">
-                                <!-- Project Details Go Here -->
-                                <img class="img-responsive img-centered" src="<?php echo base_url()?>img/p11.jpg" alt="">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Portfolio Modal 6 -->
-    <div class="portfolio-modal modal" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr">
-                        <div class="rl">
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 col-lg-offset-2">
-                            <div class="modal-body">
-                                <!-- Project Details Go Here -->
-                                <img class="img-responsive img-centered" src="<?php echo base_url()?>img/p2.jpg" alt="">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-          
+        </div>   
+    </section>         
     
 <!--................................................TESTIMONIALS................................................-->
 
@@ -416,24 +194,33 @@
           <h2 class="page-header" style="font-family: Raleway-Black; font-size: 35px;"><b>TESTIMONIALS</b><br><small style="font-family: Lato-Regular;">apa kata mereka?</small></h2>
         
         <div class="carousel slide" id="testimonials-rotate">
-          
 
         <div class="carousel-inner">
-        <div class="item active" style="border: solid 5px;">
-        <br> 
-        <div class="col-md-2" style="bottom: 10px;"><img alt="" src="<?php echo base_url()?>img/t2.jpg" class="img-circle img-responsive"/></div>
-        <div class="testimonials col-md-10">
+        <?php 
+          $active = true;
+          // var_dump($data3);
+          foreach ($data3 as $a) { ?>
+            <div class="item 
+            <?php if($active){
+              echo 'active';
+              }else{
+                echo '';
+                } ?>"
+            style="border: solid 5px;"> 
+              <br> 
+              <div class="col-md-2" style="bottom: 10px;"><img alt="" src="<?php echo base_url(). $a['gambar_testimonials']; ?>" class="img-circle img-responsive"/></div>
+              <div class="testimonials col-md-10">
 
-          <h3 style="font-family: Georgia; color: black;">
-            "Pelayanan yang baik dan ramah, tapi tetap profesional itu yang saya suka! Jangan ragu utk pake jasa mbak Fauzia!" <br><br>
-            <b><i>- Diana</i></b>
-          </h3>
+                <h3 style="font-family: Georgia; color: black;">
+                  "<?php echo $a['caption_testimonials']; ?>" <br><br>
+                  <b><i>- <?php echo $a['nama_testimonials']; ?></i></b>
+                </h3>
 
-        </div>
+              </div>
 
-        <div class="clearfix"></div>
-        </div>
-
+            <div class="clearfix"></div>
+            </div>
+<!-- 
         <div class="item" style="border: solid 5px;">
         <br> 
         <div class="col-md-2" style="bottom: 10px;"><img alt="" src="<?php echo base_url()?>img/t4.jpg" class="img-circle img-responsive"/></div>
@@ -462,7 +249,8 @@
         </div>
 
         <div class="clearfix"></div>
-        </div>
+        </div> -->
+        <?php $active=false;} ?> 
         </div>
         </div>
 

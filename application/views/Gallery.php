@@ -12,6 +12,19 @@
 	<link href="<?php echo base_url()?>assets/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 </head>
+
+<style type="text/css">
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 5px;
+}
+</style>
+
 <body>
     <div id="wrapper">
         <!-- Navigation -->
@@ -90,7 +103,7 @@
                     </div>
                 </div>
 
-               <!-- /.row -->
+              <!-- /.row -->
                 <div class="row">
                     <div class="col-lg-6">
                         <?php echo validation_errors();?>
@@ -103,9 +116,18 @@
                                     <input class="form-control" type="text" name="f_caption_gallery" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="f_gambar_gallery">Gambar</label></td>
-                                    <input type="file" name="f_gambar_gallery" size="20" />
+                                    <label for="f_occasion_gallery">Occasion</label>
+                                    <input class="form-control" type="text" name="f_occasion_gallery" required>
                                 </div>
+                                <div class="form-group">
+                                    <label for="f_gambar_gallery">Gambar</label>
+                                    <input type="file" name="f_gambar_gallery" size="20">
+                                </div>
+                                <div class="form-group">
+                                    <label for="f_keterangan_gallery">Keterangan</label>
+                                    <input class="form-control" type="text" name="f_keterangan_gallery" required>
+                                </div>
+
                                 
                               <tr>
                                 <td><input type="hidden" name="is_submit" value="1" /></td>
@@ -116,6 +138,39 @@
                         <?php echo form_close(); ?>
                 </div>
                 <!-- /.row -->
+
+                <table align="center" style="width: 100%;">
+                    <thead>
+                        <th style="padding-right: 20px;"></th>
+                        <th style="text-align: center;">ID</th>  
+                        <th style="text-align: center;">Caption</th>
+                        <th style="text-align: center;">Occasion</th>
+                        <th style="text-align: center;">Gambar</th>
+                        <th style="text-align: center;">Keterangan</th>
+                    </thead>
+                    <form method="post" action="<?php echo base_url()?>index.php/My_Controller/delete_gallery"> <!-- delete banyak row -->
+                    <tbody style="text-align: center;">
+                        <?php foreach ($data2 as $z) { ?>
+                        <tr>
+                        <td><input type="checkbox" name="gallery[]" value="<?php echo $z['ID_gallery']?>"></td>
+                        <td><?php echo $z['ID_gallery']; ?></td>
+                        <td><?php echo $z['caption_gallery']; ?></td>
+                        <td><?php echo $z['occasion_gallery']; ?></td>
+                        <td><img alt="" src="<?php echo base_url(). $z['gambar_gallery']; ?>" class="img-circle img-responsive" height="200" width="200" style="display: inline-block;"/></td>
+                        <td><?php echo $z['keterangan_gallery']; ?></td>
+
+                        <td align="center">
+                            <a href="<?php echo base_url()."index.php/My_Controller/update_gallery".$z['ID_gallery']; ?>"><button class="btn-warning" style="border: solid 1px; margin-top: 10px; margin-bottom: 10px;">Edit</button></a><br>
+                            <a href="<?php echo base_url()."index.php/My_Controller/deletegallery".$z['ID_gallery']; ?>"><button class="btn-danger" style="border: solid 1px; margin-top: 10px; margin-bottom: 10px;">Delete</button></a>
+                        </td>
+                        </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+                <br>
+                        <input class="btn-primary" type="submit" value="Delete All Checked">
+                    </form>
+
             </div>
             <!-- /.container-fluid -->
         </div>

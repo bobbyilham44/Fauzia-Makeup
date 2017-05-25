@@ -60,14 +60,14 @@ th, td {
                     <li>
                         <a href="<?php echo base_url()?>index.php/My_Controller/admin"><i class="fa fa-lg fa-edit"> Ganti Password </i></a>
                     </li>
-                    <li>
-                        <a href="<?php echo base_url()?>index.php/My_Controller/slider"><i class="fa fa-lg fa-desktop"> Slider</i></a>
+                    <li class="active">
+                        <a href="#"><i class="fa fa-lg fa-desktop"> Slider</i></a>
                     </li>
                     <li>
                         <a href="<?php echo base_url()?>index.php/My_Controller/gallery"><i class="fa fa-lg fa-image"> Gallery</i></a>
                     </li>
-                    <li class="active">
-                        <a href="#"><i class="fa fa-lg fa-thumbs-up"> Testimonials</i></a>
+                    <li>
+                        <a href="<?php echo base_url()?>index.php/My_Controller/testimonials"><i class="fa fa-lg fa-thumbs-up"> Testimonials</i></a>
                     </li>
 
                 </ul>
@@ -81,7 +81,7 @@ th, td {
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Testimonials
+                            Slider
                         </h1>
                         <ol class="breadcrumb">
                             <li>
@@ -90,79 +90,41 @@ th, td {
                             <li>
                                 <a href="<?php echo base_url()?>index.php/My_Controller/admin"><i class="fa fa-lg fa-edit"> Ganti Password </i></a>
                             </li>
-                            <li>
-                                <a href="<?php echo base_url()?>index.php/My_Controller/slider"><i class="fa fa-lg fa-desktop"> Slider</i></a>
+                            <li class="active">
+                                <a href="#"><i class="fa fa-lg fa-desktop"> Slider</i></a>
                             </li>
                             <li>
                                 <a href="<?php echo base_url()?>index.php/My_Controller/gallery"><i class="fa fa-lg fa-image"> Gallery</i></a>
                             </li>
-                            <li class="active">
-                                <a href="#"><i class="fa fa-lg fa-thumbs-up"> Testimonials</i></a>
+                            <li>
+                                <a href="<?php echo base_url()?>index.php/My_Controller/testimonials"><i class="fa fa-lg fa-thumbs-up"> Testimonials</i></a>
                             </li>
                         </ol>
                     </div>
                 </div>
 
-                <!-- /.row -->
+
                 <div class="row">
                     <div class="col-lg-6">
-                        <?php echo validation_errors();?>
-
-                            <?php echo form_open_multipart('My_Controller/createTestimonials'); ?>
-                            
+                         <?php foreach($data7 as $g){ ?>
                             <table>
                                 <div class="form-group">
-                                    <label for="f_caption_testimonials">Caption</label>
-                                    <input class="form-control" type="text" name="f_caption_testimonials" required>
+                                    <label for="f_caption_slider">Caption</label>
+                                    <input class="form-control"value="<?php echo $g['caption_slider']; ?>" type="text" name="f_caption_slider" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="f_nama_testimonials">Nama</label>
-                                    <input class="form-control" type="text" name="f_nama_testimonials" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="f_gambar_testimonials">Gambar</label></td>
-                                    <input type="file" name="f_gambar_testimonials" size="20" />
+                                    <label for="f_gambar_slider">Gambar</label></td>
+                                    <input type="file" value="<?php echo base_url($g['gambar_slider']);?>" name="f_gambar_slider" size="20" />
                                 </div>
                                 
                               <tr>
                                 <td><input type="hidden" name="is_submit" value="1" /></td>
                                 <button type="submit" name="submit" value="Submit" class="btn btn-default" style="margin-bottom: 20px; margin-top: 10px;">Submit Button</button>
                               </tr>
+                              <?php } ?>
                             </table>
 
-                        <?php echo form_close(); ?>
                 </div>
-                <!-- /.row -->
-
-                <table align="center" style="width: 100%;">
-                    <thead>
-                        <th style="padding-right: 20px;"></th>
-                        <th style="text-align: center;">ID</th>  
-                        <th width="400px" style="text-align: center;">Caption</th>
-                        <th style="text-align: center;">Nama</th>
-                        <th style="text-align: center;">Gambar</th>
-                    </thead>
-                    <form method="post" action="<?php echo base_url()?>index.php/My_Controller/delete_testimonials"> <!-- delete banyak row -->
-                    <tbody style="text-align: center;">
-                        <?php foreach ($data3 as $c) { ?>
-                        <tr>
-                        <td><input type="checkbox" name="testimonials[]" value="<?php echo $c['ID_testimonials']?>"></td>
-                        <td><?php echo $c['ID_testimonials']; ?></td>
-                        <td><?php echo $c['caption_testimonials']; ?></td>
-                        <td><?php echo $c['nama_testimonials']; ?></td>
-                        <td><img alt="" src="<?php echo base_url(). $c['gambar_testimonials']; ?>" class="img-circle img-responsive" height="200" width="200" style="display: inline-block;"/></td>
-
-                        <td align="center">
-                            <a href="<?php echo base_url()."index.php/My_Controller/update_testimonials".$c['ID_testimonials']; ?>"><button class="btn-warning" style="border: solid 1px; margin-top: 10px; margin-bottom: 10px;">Edit</button></a><br>
-                            <a href="<?php echo base_url()."index.php/My_Controller/deletetestimonials".$c['ID_testimonials']; ?>"><button class="btn-danger" style="border: solid 1px; margin-top: 10px; margin-bottom: 10px;">Delete</button></a>
-                        </td>
-                        </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
-                <br>
-                        <input class="btn-primary" type="submit" value="Delete All Checked">
-                    </form>
 
             </div>
             <!-- /.container-fluid -->

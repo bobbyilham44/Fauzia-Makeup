@@ -22,12 +22,15 @@ class My_Controller extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('My_Model');
+
 	}
 
 	public function index()
 	{
 		$data['err_message'] = "";
-		$data['data'] = $this->My_Model->getDataSlider();
+		$data['data1'] = $this->My_Model->getDataSlider(); //['data1'] sesuaikan sama view
+		$data['data2'] = $this->My_Model->getDataGallery();
+		$data['data3'] = $this->My_Model->getDataTestimonials();
 		$this->load->view('Home', $data);
 
 	}
@@ -50,7 +53,7 @@ class My_Controller extends CI_Controller {
 	public function login()
 	{
 		if($this->session->userdata('isLogin')){
-			redirect('My_Controller/admin');
+			redirect('My_Controller/komentar');
 		}else{
 			$this->load->view('Login');
 		}
@@ -91,7 +94,7 @@ class My_Controller extends CI_Controller {
 	{
 		if($this->session->userdata('isLogin'))
 		{
-		 	$this->load->view('Slider');
+		 	$this->readDataSlider();
 		}else{
 			redirect('My_Controller/login');
 		}
@@ -101,7 +104,7 @@ class My_Controller extends CI_Controller {
 	{
 		if($this->session->userdata('isLogin'))
 		{
-		 	$this->load->view('Gallery');
+		 	$this->readDataGallery();
 		}else{
 			redirect('My_Controller/login');
 		}
@@ -111,7 +114,7 @@ class My_Controller extends CI_Controller {
 	{
 		if($this->session->userdata('isLogin'))
 		{
-		 	$this->load->view('Testimonials');
+		 	$this->readDataTestimonials();
 		}else{
 			redirect('My_Controller/login');
 		}
@@ -180,23 +183,23 @@ class My_Controller extends CI_Controller {
 	}	
 
 	public function readDataKomentar() {
-	    $data = $this->My_Model->getDataKomentar();
+	    $data = $this->My_Model->getDataKomentar(); //kalo $data undefined = grgr ini blm di panggil
 	    $this->load->view('Komentar', array('data' => $data));
   	}
 
   	public function readDataSlider() {
-	    
-	    $this->load->view('Slider');
+	    $data1 = $this->My_Model->getDataSlider(); 
+	    $this->load->view('Slider', array('data1' => $data1));
   	}
 
   	public function readDataGallery() {
-	    $data = $this->My_Model->getDataGallery();
-	    $this->load->view('Gallery', array('data' => $data));
+	    $data2 = $this->My_Model->getDataGallery();
+	    $this->load->view('Gallery', array('data2' => $data2));
   	}
 
   	public function readDataTestimonials() {
-	    $data = $this->My_Model->getDataTestimonials();
-	    $this->load->view('Testimonials', array('data' => $data));
+	    $data3 = $this->My_Model->getDataTestimonials();
+	    $this->load->view('Testimonials', array('data3' => $data3));
   	}
 
   	public function create() {
@@ -209,23 +212,23 @@ class My_Controller extends CI_Controller {
 	                 
 	                );
 	    $this->My_Model->addDataKomentar($data);
-	    $this->session->set_flashdata('sukses', 'Pertanyaan anda telah berhasil dikirimkan!');
+	    // $this->session->set_flashdata('sukses', 'Pertanyaan anda telah berhasil dikirimkan!');
      	$this->email();
-	    redirect('My_Controller/index');
+	    redirect(base_url());
     
   }
 
   	public function createSlider() {
 	    $do = $this->doUploadSlider();
 	    if($do){
-	      $data = array(
+	      $data1 = array(
 	                'caption_slider' => $this->input->post('f_caption_slider'),
 	                'gambar_slider' => $do
 	                 
 	                );
-	    $this->My_Model->addDataSlider($data);
+	    $this->My_Model->addDataSlider($data1);
     }else{
-      	$data['error'] = $do;
+      	$data1['error'] = $do;
     }
     	$this->readDataSlider();
     
@@ -245,15 +248,95 @@ class My_Controller extends CI_Controller {
 		    $file_type = $_FILES['f_gambar_slider']['type'];
 		    $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
 
-    if(empty($errors) == true){
-	    move_uploaded_file($file_tmp, "./uploads/".$file_name);
-	    return 'uploads/'.$file_name;
-    }else{
-      	print_r($errors);
-    }
-  }
+	    if(empty($errors) == true){
+		    move_uploaded_file($file_tmp, "./uploads/".$file_name);
+		    return 'uploads/'.$file_name;
+	    }else{
+	      	print_r($errors);
+	    }
+	}
 
-  public function delete($ID){
+	public function createGallery() {
+	    $do = $this->doUploadGallery();
+	    if($do){
+	      $data3 = array(
+	                'caption_gallery' => $this->input->post('f_caption_gallery'),
+	                'occasion_gallery' => $this->input->post('f_occasion_gallery'),
+	                'gambar_gallery' => $do,
+	                'keterangan_gallery' => $this->input->post('f_keterangan_gallery')
+	                 
+	                );
+	    $this->My_Model->addDataGallery($data3);
+    }else{
+      	$data3['error'] = $do;
+    }
+    	$this->readDataGallery();
+    
+  	}  
+
+  	public function doUploadGallery(){
+    	$config['upload_path']          = './f_gambar_gallery/';
+        $config['allowed_types']        = 'gif|jpg|png';
+        $config['max_size']             = 100;
+        $config['max_width']            = 1024;
+        $config['max_height']           = 768;
+
+		    $errors = array();
+		    $file_name = $_FILES['f_gambar_gallery']['name'];
+		    $file_size = $_FILES['f_gambar_gallery']['size'];
+		    $file_tmp = $_FILES['f_gambar_gallery']['tmp_name'];
+		    $file_type = $_FILES['f_gambar_gallery']['type'];
+		    $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+
+	    if(empty($errors) == true){
+		    move_uploaded_file($file_tmp, "./uploads/".$file_name);
+		    return 'uploads/'.$file_name;
+	    }else{
+	      	print_r($errors);
+	    }
+	}
+
+
+	public function createTestimonials() {
+	    $do = $this->doUploadTestimonials();
+	    if($do){
+	      $data3 = array(
+	                'caption_testimonials' => $this->input->post('f_caption_testimonials'),
+	                'nama_testimonials' => $this->input->post('f_nama_testimonials'),
+	                'gambar_testimonials' => $do
+	                 
+	                );
+	    $this->My_Model->addDataTestimonials($data3);
+    }else{
+      	$data3['error'] = $do;
+    }
+    	$this->readDataTestimonials();
+    
+  	}  
+
+  	public function doUploadTestimonials(){
+    	$config['upload_path']          = './f_gambar_testimonials/';
+        $config['allowed_types']        = 'gif|jpg|png';
+        $config['max_size']             = 100;
+        $config['max_width']            = 1024;
+        $config['max_height']           = 768;
+
+		    $errors = array();
+		    $file_name = $_FILES['f_gambar_testimonials']['name'];
+		    $file_size = $_FILES['f_gambar_testimonials']['size'];
+		    $file_tmp = $_FILES['f_gambar_testimonials']['tmp_name'];
+		    $file_type = $_FILES['f_gambar_testimonials']['type'];
+		    $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+
+	    if(empty($errors) == true){
+		    move_uploaded_file($file_tmp, "./uploads/".$file_name);
+		    return 'uploads/'.$file_name;
+	    }else{
+	      	print_r($errors);
+	    }
+	}
+
+  public function deletekomentar($ID){ //delete 1 komentar
     $where = array('ID_komentar' => $ID);
     $res = $this->My_Model->deleteData('komentar', $where);
     if($res>=1){
@@ -261,11 +344,57 @@ class My_Controller extends CI_Controller {
     }
   }
 
-  public function delete_barang(){
+  public function delete_komentar(){ //delete banyak komentar
     $item = $this->input->post('komentar');
     $this->My_Model->delete_item_komentar($item);
     redirect('My_Controller/readDataKomentar');
   }
+
+  public function deleteslider($ID){ //delete 1 komentar
+    $where = array('ID_slider' => $ID);
+    $res = $this->My_Model->deleteData('slider', $where);
+    if($res>=1){
+      redirect('My_Controller/readDataSlider');
+    }
+  }
+
+  public function delete_slider(){ //delete banyak komentar
+    $item = $this->input->post('slider');
+    $this->My_Model->delete_item_Slider($item);
+    redirect('My_Controller/readDataSlider');
+  }
+
+  public function deletegallery($ID){ //delete 1 komentar
+    $where = array('ID_gallery' => $ID);
+    $res = $this->My_Model->deleteData('gallery', $where);
+    if($res>=1){
+      redirect('My_Controller/readDatagallery');
+    }
+  }
+
+  public function delete_gallery(){ //delete banyak komentar
+    $item = $this->input->post('gallery');
+    $this->My_Model->delete_item_gallery($item);
+    redirect('My_Controller/readDataGallery');
+  }
+
+  public function deletetestimonials($ID){ //delete 1 komentar
+    $where = array('ID_testimonials' => $ID);
+    $res = $this->My_Model->deleteData('testimonials', $where);
+    if($res>=1){
+      redirect('My_Controller/readDataTestimonials');
+    }
+  }
+
+  public function delete_testimonials(){ //delete banyak komentar
+    $item = $this->input->post('testimonials');
+    $this->My_Model->delete_item_testimonials($item);
+    redirect('My_Controller/readDataTestimonials');
+  }
+
+
+
+
 
   public function update(){
   	$this->My_Model->getDataAdmin();
@@ -274,7 +403,42 @@ class My_Controller extends CI_Controller {
     redirect('My_Controller/admin');
   }
 
+  public function edit_data($ID_slider){ //////////////////////////////////////////////////
+		$u = $this->My_Model->GetBarang("where ID_slider = '$ID_slider'");
+		$data5 = array(
+			"ID_slider" => $u[0]['ID_slider'],
+			"caption_slider" => $u[0]['caption_slider'],
+			"gambar_slider" => $u[0]['gambar_slider']
+
+			);
+		$this->load->view('FormSlider',$data5);
+	}
+
+	public function do_update(){ /////////////////////////////////////////////////////
+	//	echo "<pre>";
+	//	print_r($_POST);
+	//	echo "/<pre>";
+		$ID_slider = $_POST['ID_slider'];
+		$caption_slider = $_POST['caption_slider'];
+		$gambar_slider = $_POST['gambar_slider'];
+		$data_update = array(
+			'caption_slider' => $caption_slider,
+			'gambar_slider' => $gambar_slider
+			);
+			$where = array('ID_slider' => $ID_slider);
+			$res = $this->My_Model->UpdateData('slider',$data_update,$where);
+			if($res>=1){
+				redirect('My_Controller/slider');
+			}else{
+				echo "<h2>update gagal</h2>";
+			}
+	}
+
+
+
+
   public function email(){
+  	$this->load->library('email');
   	$config['protocol'] = 'smtp';
 	$config['smtp_host'] = 'ssl://smtp.gmail.com';
 	$config['smtp_port'] = '465';

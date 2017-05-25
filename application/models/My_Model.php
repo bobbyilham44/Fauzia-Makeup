@@ -91,13 +91,13 @@ class My_Model extends CI_Model {
 
 
 
-  public function addDataSlider($data) {
-    $this->db->insert('slider', $data);
+  public function addDataSlider($data1) {
+    $this->db->insert('slider', $data1);
   }
 
   public function getDataSlider() {
-    $data = $this->db->select('*')->from('slider')->get();
-    return $data->result_array();
+    $data1 = $this->db->select('*')->from('slider')->get();
+    return $data1->result_array();
   }
 
   public function delete_item_slider($item){
@@ -108,13 +108,13 @@ class My_Model extends CI_Model {
 
 
 
-  public function addDataGallery($data) {
-    $this->db->insert('gallery', $data);
+  public function addDataGallery($data2) {
+    $this->db->insert('gallery', $data2);
   }
 
   public function getDataGallery() {
-    $data = $this->db->select('*')->from('gallery')->get();
-    return $data->result_array();
+    $data2 = $this->db->select('*')->from('gallery')->get();
+    return $data2->result_array();
   }
 
   public function delete_item_gallery($item){
@@ -125,19 +125,40 @@ class My_Model extends CI_Model {
 
 
 
-  public function addDataTestimonials($data) {
-    $this->db->insert('testimonials', $data);
+  public function addDataTestimonials($data3) {
+    $this->db->insert('testimonials', $data3);
   }
 
   public function getDataTestimonials() {
-    $data = $this->db->select('*')->from('testimonials')->get();
-    return $data->result_array();
+    $data3 = $this->db->select('*')->from('testimonials')->get();
+    return $data3->result_array();
   }
 
   public function delete_item_testimonials($item){
     $this->db->where_in('ID_testimonials', $item);
     $this->db->delete('testimonials');
   }
+
+
+
+
+
+
+
+
+
+  public function GetBarang($where=""){
+    $data5 = $this->db->query('select * from slider '.$where);
+    return $data5->result_array();
+  }
+public function UpdateData($tabelName,$data5,$where){
+    $res = $this->db->update($tabelName,$data5,$where);
+    return $res;
+  }
+
+
+
+
 
 
   
